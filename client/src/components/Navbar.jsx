@@ -10,11 +10,11 @@ const Navbar = ({ isAuthenticated, onLogout, user }) => {
   return (
     <nav className="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur shadow-lg border-b border-gray-200 dark:border-gray-700">
       <div className="container mx-auto flex items-center justify-between py-3 px-4">
-        <Link to="/" className="font-orbitron text-2xl font-bold text-gray-800 dark:text-gray-100">
+        <Link to="/" className="text-2xl font-bold text-gray-800 dark:text-gray-100">
           CoinSight
         </Link>
         <div className="flex items-center gap-4">
-          <Link to="/" className="hover:text-blue-600 font-semibold text-gray-700 dark:text-gray-200">Home</Link>
+          <Link to="/dashboard" className="hover:text-blue-600 font-semibold text-gray-700 dark:text-gray-200">Dashboard</Link>
           <Link to="/portfolio" className="hover:text-blue-600 font-semibold text-gray-700 dark:text-gray-200">Portfolio</Link>
           <Link to="/watchlist" className="hover:text-blue-600 font-semibold text-gray-700 dark:text-gray-200">Watchlist</Link>
           <button

@@ -28,13 +28,40 @@ const App = () => {
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
-      // You could add a token validation endpoint here
-      setUser({ token });
+      // Validate token and get user data
+      validateToken(token);
+    } else {
+      setLoading(false);
     }
-    setLoading(false);
   }, []);
 
+  const validateToken = async (token) => {
+    try {
+      const response = await fetch('http://localhost:5000/api/auth/validate', {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      
+      if (response.ok) {
+        const userData = await response.json();
+        setUser({ ...userData, token });
+      } else {
+        // Token is invalid, remove it
+        localStorage.removeItem('token');
+        setUser(null);
+      }
+    } catch (error) {
+      console.error('Token validation error:', error);
+      localStorage.removeItem('token');
+      setUser(null);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const handleLogin = (userData) => {
+    console.log('App component - Login handler called with:', userData);
     setUser(userData);
   };
 
